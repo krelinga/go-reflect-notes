@@ -20,3 +20,21 @@ func ExampleValueOfBypassesInterface() {
 	// c value type: time.Time
 	// i value type: time.Time
 }
+
+func ExampleValueOfBypassesInterface_nil() {
+	type I interface {
+		String() string
+	}
+	var i I = nil
+	fmt.Println("i is valid?", reflect.ValueOf(i).IsValid())
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("IsNil() panicked")
+		}
+	}()
+	fmt.Println("i is nil?", reflect.ValueOf(i).IsNil())
+
+	// Output:
+	// i is valid? false
+	// IsNil() panicked
+}

@@ -1,0 +1,22 @@
+package reflectnotes
+
+import (
+	"fmt"
+	"reflect"
+	"time"
+)
+
+func ExampleValueOfBypassesInterface() {
+	type I interface {
+		String() string
+	}
+	var c = time.Now()
+	var i I = c
+
+	fmt.Println("c value type:", reflect.ValueOf(c).Type())
+	fmt.Println("i value type:", reflect.ValueOf(i).Type())
+
+	// Output:
+	// c value type: time.Time
+	// i value type: time.Time
+}
